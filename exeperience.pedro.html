@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedro Henrique Santos De Jesus — Portfólio Interativo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #2F2F2F;
+      transition: opacity 0.5s ease;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      box-shadow: rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8px;
+      z-index: 900;
+    }
+
+    .nav-links {
+      gap: 3.2rem;
+      padding: 30px;
+  margin-left: 0;
+  margin-right: 28px;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900; /* Roboto Black */
+  color: black;
+}
+     
+.nav-links{
+      background: linear-gradient(170deg, #FFD700, #191970);  /* cor de fundo amarela */
+      color: white;                /* cor do texto */
+      padding: 5px 7px;           /* espaço interno */
+      border-radius: 50px;           /* cantos arredondados */
+      font-weight: 300;            /* texto em negrito */
+      display: block;        /* mantém em linha */
+      text-decoration: none;        /* remove sublinhado se for link */
+      border: 2px solid #000000;       /* borda leve */
+    }
+  
+  .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 300;
+      position: relative;
+      padding: 20px 0px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: -10;
+      bottom: -10px;
+      width: 100%;
+      height: 2px;
+      background: #ffcc00;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #000;
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+  .profile-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #ffcc00;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .profile-container:hover {
+    transform: scale(1.1);
+  }
+
+  .profile-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+    .profile-container:hover {
+      transform: scale(1.1);
+    }
+
+    #zoom-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #zoom-modal img {
+      max-width: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+
+    main {
+      padding-top: 100px; /* espaço para o cabeçalho fixo */
+    }
+
+    section {
+      padding: 8px 4rem;
+      border-bottom: 1px solid #ccc;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    form input, form textarea {
+      display: block;
+      margin: 0.5rem 0;
+      width: 100%;
+      padding: 0.5rem;
+    }
+
+    form button {
+      padding: 0.5rem 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+    }
+    #panificacao{
+   Text-align: center;
+   color: white;
+   font-family: 'Roboto', sans-serif;
+  font-weight: 900; /* Roboto Black */
+   }
+   
+       #dev{
+   Text-align: center;
+   color: white;
+   font-family: 'Roboto', sans-serif;
+  font-weight: 900; /* Roboto Black */
+   }
+   
+       #ilustrador{
+   Text-align: center;
+   color: white;
+   font-family: 'Roboto', sans-serif;
+  font-weight: 900; /* Roboto Black */
+   }
+   
+       #timeline{
+   Text-align: center;
+   color: white;
+   font-family: 'Roboto', sans-serif;
+  font-weight: 900; /* Roboto Black */
+   }
+   
+       #contato{
+   Text-align: center;
+   color: white;
+   font-family: 'Roboto', sans-serif;
+  font-weight: 900; /* Roboto Black */
+   }
+   #profile-pic{
+   	width: 40px;
+   }
+  </style>
+</head>
+<body>
+
+  <header>
+ <div class="profile-container">
+  <img src="https://i.ibb.co/hJtsKS70/20240424-130812.jpg"" alt="Foto de perfil">
+<class="profile-pic" onclick="abrirZoom()" />
+</div>
+    <nav class="nav-links">
+  <a href="https://docs.google.com/document/d/1BsK_ix0_QFnrmcD6kauUcICt2mHq0g_HdFHntBcb_AI/edit?usp=drivesdk" download style="
+  ">
+    📄 Baixar currículo
+  </a>
+</nav>
+  </header>
+
+  <main>
+<section id="panificacao">
+  <h1>🍞 PANIFICAÇÃO</h1>
+
+  <style>
+    #carouselPanificacao {
+      display: none;
+      width: 100%;
+      max-width: 400px;
+      overflow: hidden;
+      margin-top: 10px;
+      position: relative;
+    }
+
+    #carouselPanificacao .carousel-images {
+      display: flex;
+      width: calc(400px * 3);
+      animation: slide 6s infinite;
+    }
+
+    #carouselPanificacao .carousel-images img {
+      width: 400px;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      33% { transform: translateX(-400px); }
+      66% { transform: translateX(-800px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+
+  <h5 onclick="toggleCarouselPanificacao()">Experiências, fotos, certificados (clique aqui para ver imagens)</h5>
+  <p>Comecei na área de panificação há três anos atrás, desde então essa foi minha vocação...</p>
+
+  <div id="carouselPanificacao">
+    <div class="carousel-images">
+      <a href="https://ibb.co/BK7jkBG6"><img src="https://i.ibb.co/BK7jkBG6/20230103-133220.jpg" alt="Panificação 1" border="0"></a>
+      <a href="https://ibb.co/dJPfYmhX"><img src="https://i.ibb.co/dJPfYmhX/20230114-143238.jpg" alt="Panificação 2" border="0"></a>
+      <a href="https://ibb.co/SwvCNSYC"><img src="https://i.ibb.co/SwvCNSYC/20230117-143818.jpg" alt="Panificação 3" border="0"></a>
+    </div>
+  </div>
+
+  <script>
+    function toggleCarouselPanificacao() {
+      const el = document.getElementById('carouselPanificacao');
+      el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</section>
+
+<section id="dev">
+  <h1>💻 DESENVOLVEDOR FRONT-END</h1>
+
+  <style>
+    #carouselDev {
+      display: none;
+      width: 100%;
+      max-width: 400px;
+      overflow: hidden;
+      margin-top: 10px;
+      position: relative;
+    }
+
+    #carouselDev .carousel-images {
+      display: flex;
+      width: calc(400px * 3);
+      animation: slide 6s infinite;
+    }
+
+    #carouselDev .carousel-images img {
+      width: 400px;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      33% { transform: translateX(-400px); }
+      66% { transform: translateX(-800px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+
+  <h5 onclick="toggleCarouselDev()">Projetos, fotos, certificados (clique aqui para ver imagens)</h5>
+  <p>Comecei na área de desenvolvimento por curiosidade há 1 anos atrás, e desde então venho me dedicando a criar soluções digitais...</p>
+
+  <div id="carouselDev">
+    <div class="carousel-images">
+     
+<a href='https://postimg.cc/t1pv0RHW' target='_blank'><img src='https://i.postimg.cc/t1pv0RHW/Screenshot-20251003-194526-HTML-Viewer.jpg' border='0' alt='Screenshot-20251003-194526-HTML-Viewer'/></a>
+   
+<a href='https://postimg.cc/3yzhCDGx' target='_blank'><img src='https://i.postimg.cc/3yzhCDGx/Screenshot-20240423-162301-Chrome-picsay.jpg' border='0' alt='Screenshot-20240423-162301-Chrome-picsay'/></a>
+  
+     <a href='https://postimg.cc/hzgB5R2Z' target='_blank'><img src='https://i.postimg.cc/hzgB5R2Z/1713814082-picsay.jpg' border='0' alt='1713814082-picsay'/></a>
+  
+    </div>
+  </div>
+
+  <script>
+    function toggleCarouselDev() {
+      const el = document.getElementById('carouselDev');
+      el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</section>
+
+<section id="ilustrador">
+  <h1>🎨 ILUSTRADOR</h1>
+
+  <style>
+    #carouselIlustrador {
+      display: none;
+      width: 100%;
+      max-width: 400px;
+      overflow: hidden;
+      margin-top: 10px;
+      position: relative;
+    }
+
+    #carouselIlustrador .carousel-images {
+      display: flex;
+      width: calc(400px * 3);
+      animation: slide 6s infinite;
+    }
+
+    #carouselIlustrador .carousel-images img {
+      width: 400px;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      33% { transform: translateX(-400px); }
+      66% { transform: translateX(-800px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+
+  <h5 onclick="toggleCarouselIlustrador()">Portfólio, artes, certificados (clique aqui para ver imagens)</h5>
+  <p>Comecei na ilustração há oito anos atrás, explorando estilos digitais e tradicionais...</p>
+
+  <div id="carouselIlustrador">
+    <div class="carousel-images">
+      
+<a href='https://postimg.cc/PL5bzCHH' target='_blank'><img src='https://i.postimg.cc/PL5bzCHH/Projeto-20250216055153.png' border='0' alt='Projeto-20250216055153'/></a>
+
+<a href='https://postimg.cc/G9yFQ0Wr' target='_blank'><img src='https://i.postimg.cc/G9yFQ0Wr/Projeto-20250125091312.png' border='0' alt='Projeto-20250125091312'/></a>
+  
+<a href='https://postimg.cc/3kJ0zzc3' target='_blank'><img src='https://i.postimg.cc/3kJ0zzc3/p-gina-21-1.png' border='0' alt='p-gina-21-1'/></a>
+    </div>
+  </div>
+
+  <script>
+    function toggleCarouselIlustrador() {
+      const el = document.getElementById('carouselIlustrador');
+      el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</section>
+  
+  <section id="timeline">
+      <h1>📅 LINHA DO TEMPO</h1>
+      <p>2022 — Início na panificação<br>2023 — Primeiro projeto como dev<br>2016 — Ilustrações para clientes</p>
+    </section>
+
+    <section id="contato">
+      <h1>📬 Contato</h1>
+      <form onsubmit="enviarFormulario(e)">
+        <input type="text" placeholder="Seu nome" required />
+        <input type="email" placeholder="Seu email" required />
+        <textarea placeholder="Mensagem" rows="5" required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+      <p id="status"></p>
+    </section>
+  </main>
+
+  <div id="zoom-modal" onclick="fecharZoom()">
+    <img src="perfil.jpg" alt="Zoom da foto de perfil" />
+  </div>
+
+  <script>
+    // Zoom da foto
+    function abrirZoom() {
+      document.getElementById('zoom-modal').style.display = 'flex';
+    }
+    function fecharZoom() {
+      document.getElementById('zoom-modal').style.display = 'none';
+    }
+
+    // Animação ao rolar
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(section => observer.observe(section));
+
+    // envio de formulário
+    function enviarFormulario(e) {
+  e.preventDefault();
+
+  const nome = document.getElementById('nome').value;
+  const email = document.getElementById('email').value;
+  const mensagem = document.getElementById('mensagem').value;
+
+  const assunto = encodeURIComponent("📬 Contato via site do Pedro");
+  const corpo = encodeURIComponent(
+    `Nome: ${nome}\nEmail: ${email}\n\nMensagem:\n${mensagem}`
+  );
+
+  const mailtoLink = `mailto:Minatokazee9@gmail.com?subject=${assunto}&body=${corpo}`;
+  window.location.href = mailtoLink;
+
+  document.getElementById('status').textContent = "Abrindo seu app de e-mail...";
+}
+  </script>
+  
+  <!-- Botão fixado no topo e centralizado -->
+<button onclick="mostrarSobreMim()" style="
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1001;
+">
+  Sobre mim
+</button>
+
+<!-- Aba estilo notificação com animação -->
+<div id="sobreMimNotificacao" style="
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 320px;
+  background-color: #fff;
+  border: 2px solid #333;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  animation: fadeIn 0.6s ease forwards;
+  z-index: 1000;
+">
+  <strong style="font-size: 18px;">👤 Pedro Henrique Santos De Jesus</strong>
+  <p style="margin-top: 10px;">
+    Tenho 21 anos e nasci no interior da Bahia. Me dedico à arte desde os 13 anos. A chegada da panificação na minha vida foi uma surpresa que nem eu esperava. Também me interessei por tecnologias, ingressando no mundo da programação front-end e dos jogos índies. Faço cada uma dessas coisas com dedicação e paixão pelo que escolhi fazer e ser.
+  </p>
+  <button onclick="fecharSobreMim()" style="
+    margin-top: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  ">
+    Fechar
+  </button>
+</div>
+
+<!-- Estilo da animação -->
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(20px); }
+  }
+</style>
+
+<!-- Script de controle -->
+<script>
+  function mostrarSobreMim() {
+    const aba = document.getElementById('sobreMimNotificacao');
+    aba.style.display = 'block';
+    aba.style.animation = 'fadeIn 0.6s ease forwards';
+  }
+
+  function fecharSobreMim() {
+    const aba = document.getElementById('sobreMimNotificacao');
+    aba.style.animation = 'fadeOut 0.6s ease forwards';
+    setTimeout(() => {
+      aba.style.display = 'none';
+    }, 600);
+  }
+</script>
+
+</body>
+</html>
